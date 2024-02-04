@@ -1,0 +1,102 @@
+﻿@page "/"
+@using MauiApp1.Data
+<h1> Katastr Nemovitostí</h1>
+<div id="centered-container">
+    <div id="lv-container">
+        <h3> List Vlastnictví</h3>
+        <label for="lv-id"> Identifikační číslo vlastníka: </label>
+        <input class="form-control" placehodler="" id="lv-id" @bind="lvId" type="text">
+        <label for="lv-katastralniuzemi"> Název katastrálního území: </label>
+        <input class="form-control" placehodler="" id="lv-katastralniuzemi" @bind="lvKatastralniUzemi" type="text">
+        <button class="btn btn-primary" @onclick="HandleReadLv">Search!</button>
+    </div>
+    <div id="parcela-container">
+        <h3> Vyhledej parcelu</h3>
+        <label for="parcela-parcela-nazev"> Název parcely: </label>
+        <input class="form-control" placehodler="(St) 00/0" id="parcela-parcela-nazev" @bind="parcelaId" type="text">
+        <label for="parcela-katastralniuzemi-parcela"> Název katastrálního území: </label>
+        <input class="form-control" placehodler="" id="parcela-katastralniuzemi-parcela" @bind="parcelaKatastralniUzemi" type="text">
+        <button class="btn btn-primary" @onclick="HandleReadParcela">Search!</button>
+    </div>
+    <div id="zmenapodilu-container">
+        <h3> Změna poměru</h3>
+        <label for="zmenapodilu-jmenopridani"> Identikikator vlastníka Přidání: </label>
+        <input class="form-control" placehodler="" id="zmenapodilu-jmenopridani" @bind="podilVlastnikPridani" type="text">
+        <label for="zmenapodilu-jmenoodebrani"> Identikikator vlastníka Odebrání: </label>
+        <input class="form-control" placehodler="" id="zmenapodilu-jmenoodebrani" @bind="podilVlastnikOdebrani" type="text">
+        <label for="zmenapodilu-novypodil"> Změna poměru: </label>
+        <input class="form-control" placehodler="" id="zmenapodilu-novypodil" @bind="podilnovy" type="text">
+        <label for="zmenapodilu-parcelanazev"> Název parcely: </label>
+        <input class="form-control" placehodler="" id="zmenapodilu-parcelanazev" @bind="podilParcela" type="text">
+        <label for="zmenapodilu-nazevkatuzemi"> Název Katastrálního území: </label>
+        <input class="form-control" placehodler="" id="zmenapodilu-nazevkatuzemi" @bind="podilKatastralniUzemi" type="text">
+        <button class="btn btn-primary" id="change-button" @onclick="HandleChangePodli">Change!</button>
+    </div>
+</div>
+@if (result == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            @if (result.Count > 0)
+            {
+                @foreach (string prop in result[0])
+                {
+                    <th>@prop</th>
+                }
+            }
+        </tr>
+        </thead>
+        <tbody>
+        @for (int i = 1; i < result.Count; i++)
+        {
+            <tr>
+                @foreach (string prop in result[i])
+                {
+                    <td>@prop</td>
+                }
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code
+{
+    private string lvId;
+    private string lvKatastralniUzemi;
+    
+    private string parcelaId;
+    private string parcelaKatastralniUzemi;
+    
+    private string podilVlastnikPridani;
+    private string podilVlastnikOdebrani;
+    private string podilKatastralniUzemi;
+    private string podilParcela;
+    private int podilnovy;
+    
+    private List<List<string>> result = new();
+    DBOService DbObjectService = new DBOService();
+
+    private void HandleReadLv()
+    {
+        result = DbObjectService.ReadLV(lvId, lvKatastralniUzemi);
+        StateHasChanged();
+    }
+
+    private void HandleReadParcela()
+    {
+        result = DbObjectService.ReadParcela(parcelaId, parcelaKatastralniUzemi);
+        StateHasChanged();
+    }
+    private void HandleChangePodli()
+    {
+        DbObjectService.ChangePodil(podilVlastnikPridani, podilVlastnikOdebrani, podilKatastralniUzemi, podilParcela, podilnovy);
+    }
+}

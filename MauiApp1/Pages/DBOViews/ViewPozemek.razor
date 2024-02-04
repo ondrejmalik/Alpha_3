@@ -1,0 +1,42 @@
+﻿@page "/pozemek"
+@using alpha_3_CRUD
+@using MauiApp1.Pages.Components
+
+<h1>Pozemek</h1>
+<h3>Search</h3>
+
+<input class="form-control" @bind="VD.selectedId" type="text">
+<button class="btn btn-primary" @onclick="VD.HandleSingleInputChange">Search!</button>
+<button class="btn btn-primary" @onclick="VD.HandleDelete">Delete ID!</button>
+<br>
+<label for="new-parecela-nazev"> Parcela: </label>
+<input class="form-control" id="new-parecela-nazev"@bind="VD.newObject.Parcela" type="text">
+
+<label for="new-vymera-nazev"> VymeraM2: </label>
+<input class="form-control" id="new-vymera-nazev"@bind="VD.newObject.VymeraM2" type="text">
+
+<label for="new-popis-nazev"> Popis: </label>
+<input class="form-control" id="new-popis-nazev"@bind="VD.newObject.Popis" type="text">
+
+<label for="new-iddruh-nazev"> IdDruh: </label>
+<input class="form-control" id="new-iddruh-nazev"@bind="VD.newObject.IdDruh" type="text">
+
+<label for="new-idkatastralniuzemi-nazev"> IdKatastralniUzemi: </label>
+<input class="form-control" id="new-idkatastralniuzemi-nazev"@bind="VD.newObject.IdKatastralniUzemi" type="text">
+
+<label for="new-idzpusobochrany-nazev"> IdZpusobOchrany: </label>
+<input class="form-control" id="new-idzpusobochrany-nazev"@bind="VD.newObject.IdZpusobOchrany" type="text">
+<label for="new-nazev"> IdZpusobVyuziti: </label>
+<input class="form-control" id="new-nazev"@bind="VD.newObject.IdZpusobVyuziti" type="text">
+<br>
+<button class="btn btn-primary" @onclick="VD.HandleCreate">Create!</button>
+<button class="btn btn-primary" @onclick="VD.HandleUpdate">Update ID!</button>
+<ReadSingleView @ref="VD.readSingleViewRef" ChildType="typeof(Pozemek)" ItemId="@VD.selectedId"/>
+<h3>List</h3>
+<ListDataView @ref="VD.listDataViewRef" ChildType="typeof(Pozemek)"/>
+<button class="btn btn-primary" @onclick="VD.HandleListInputChange">List!</button>
+<h3 @bind="VD.DebugText"></h3>
+<ImportJsonViewComponent Type="typeof(Pozemek)"/>
+@code {
+    ViewData.ViewDataModel<Pozemek> VD = new();
+}

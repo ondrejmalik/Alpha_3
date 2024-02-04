@@ -1,0 +1,36 @@
+﻿@page "/vecnebremeno"
+@using alpha_3_CRUD
+@using MauiApp1.Pages.Components
+
+<h1>Věcné Břemeno</h1>
+<h3>Search</h3>
+
+<input class="form-control" placehodler="" @bind="VD.selectedId" type="text">
+<button class="btn btn-primary" @onclick="VD.HandleSingleInputChange">Search!</button>
+<button class="btn btn-primary" @onclick="VD.HandleDelete">Delete ID!</button>
+<br>
+<label for="new-nazev"> Popis: </label>
+<input class="form-control" placehodler="" id="new-nazev"@bind="VD.newObject.Popis" type="text">
+<label for="new-poradik-nazev"> PoradiK: </label>
+<input class="form-control" placehodler="" id="new-poradik-nazev"@bind="VD.newObject.PoradiK" type="text">
+
+<label for="new-idopravnenik-nazev"> IdOpravneniK: </label>
+<input class="form-control" placehodler="" id="new-idopravnenik-nazev"@bind="VD.newObject.IdOpravneniK" type="text">
+
+<label for="new-idopravneniveprospechnemovitosti-nazev"> IdOpravneniVeProspechNemovitosti: </label>
+<input class="form-control" placehodler="" id="new-idopravneniveprospechnemovitosti-nazev"@bind="VD.newObject.IdOpravneniVeProspechNemovitosti" type="text">
+
+<label for="new-identifikatorveprospechosobe-nazev"> IdentifikatorVeProspechOsobe: </label>
+<input class="form-control" placehodler="" id="new-identifikatorveprospechosobe-nazev"@bind="VD.newObject.IdentifikatorVeProspechOsobe" type="text">
+<br>
+<button class="btn btn-primary" @onclick="VD.HandleCreate">Create!</button>
+<button class="btn btn-primary" @onclick="VD.HandleUpdate">Update ID!</button>
+<ReadSingleView @ref="VD.readSingleViewRef" ChildType="typeof(VecneBremeno)" ItemId="@VD.selectedId"/>
+<h3>List</h3>
+<ListDataView @ref="VD.listDataViewRef" ChildType="typeof(VecneBremeno)"/>
+<button class="btn btn-primary" @onclick="VD.HandleListInputChange">List!</button>
+<h3 @bind="VD.DebugText"></h3>
+<ImportJsonViewComponent Type="typeof(VecneBremeno)"/>
+@code {
+ViewData.ViewDataModel<VecneBremeno> VD = new();
+}

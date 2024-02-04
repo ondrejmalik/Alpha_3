@@ -1,0 +1,26 @@
+﻿@page "/druhpozemku"
+@using alpha_3_CRUD
+@using MauiApp1.Pages.Components
+
+<h1>Druh Pozemku</h1>
+<h3>Search</h3>
+
+<input class="form-control" placehodler="" @bind="VD.selectedId" type="text">
+<button class="btn btn-primary" @onclick="VD.HandleSingleInputChange">Search!</button>
+<button class="btn btn-primary" @onclick="VD.HandleDelete">Delete ID!</button>
+<br>
+<br>
+<label for="new-nazev-nazev"> Nazev: </label>
+<input class="form-control" placehodler="" id="new-nazev-nazev"@bind="VD.newObject.Nazev" type="text">
+<br>
+<button class="btn btn-primary" @onclick="VD.HandleCreate">Create!</button>
+<button class="btn btn-primary" @onclick="VD.HandleUpdate">Update ID!</button>
+<ReadSingleView @ref="VD.readSingleViewRef" ChildType="typeof(DruhPozemku)" ItemId="@VD.selectedId"/>
+<h3>List</h3>
+<ListDataView @ref="VD.listDataViewRef" ChildType="typeof(DruhPozemku)"/>
+<button class="btn btn-primary" @onclick="VD.HandleListInputChange">List!</button>
+<h3 @bind="VD.DebugText"></h3>
+<ImportJsonViewComponent Type="typeof(DruhPozemku)"/>
+@code {
+    ViewData.ViewDataModel<DruhPozemku> VD = new();
+}

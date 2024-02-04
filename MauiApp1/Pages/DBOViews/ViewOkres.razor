@@ -1,0 +1,29 @@
+﻿@page "/okres"
+@using alpha_3_CRUD
+@using MauiApp1.Pages.Components
+
+<h1>Okres</h1>
+<h3>Search</h3>
+
+<input class="form-control" placehodler="" @bind="VD.selectedId" type="text">
+<button class="btn btn-primary" @onclick="VD.HandleSingleInputChange">Search!</button>
+<button class="btn btn-primary" @onclick="VD.HandleDelete">Delete ID!</button>
+<br>
+<label for="new-nazev-nazev"> Nazev: </label>
+<input class="form-control" placehodler="" id="new-nazev-nazev"@bind="VD.newObject.Nazev" type="text">
+
+<label for="new-idkraj-nazev"> IdKraj: </label>
+<input class="form-control" placehodler="" id="new-idkraj-nazev"@bind="VD.newObject.IdKraj" type="text">
+<br>
+<button class="btn btn-primary" @onclick="VD.HandleCreate">Create!</button>
+<button class="btn btn-primary" @onclick="VD.HandleUpdate">Update ID!</button>
+<ReadSingleView @ref="VD.readSingleViewRef" ChildType="typeof(Okres)" ItemId="@VD.selectedId"/>
+<h3>List</h3>
+<ListDataView @ref="VD.listDataViewRef" ChildType="typeof(Okres)"/>
+<button class="btn btn-primary" @onclick="VD.HandleListInputChange">List!</button>
+<h3 @bind="VD.DebugText"></h3>
+<ImportJsonViewComponent Type="typeof(Okres)"/>
+
+@code {
+ViewData.ViewDataModel<Okres> VD = new();
+}

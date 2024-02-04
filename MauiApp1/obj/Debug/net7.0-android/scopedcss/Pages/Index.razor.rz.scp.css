@@ -1,0 +1,22 @@
+h1[b-ks7hjf3382]{
+    text-align: center;
+    margin: auto;
+    color: darkorange;
+}
+#parcela-container[b-ks7hjf3382]{
+    display:inline-block;
+    width: 48%;
+}
+#lv-container[b-ks7hjf3382]{
+    display:inline-block;
+    width: 48%;
+}
+#centered-container[b-ks7hjf3382]{
+    text-align: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+#change-button[b-ks7hjf3382]{
+    margin-top: 3px;
+    width: 100%;
+}

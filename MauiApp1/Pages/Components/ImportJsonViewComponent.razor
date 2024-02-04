@@ -1,0 +1,47 @@
+﻿@using System.Reflection
+@using System.Runtime.CompilerServices
+@using alpha_3_CRUD
+@using MauiApp1.Data
+@using Newtonsoft.Json
+<h3>JSON Import</h3>
+<InputFile OnChange="HandleFileChange"/>
+@if (file != null)
+{
+<p>File selected: @UploadFile()</p>
+<button class="btn btn-primary">Upload</button>
+}
+<h1>@Debug</h1>
+
+
+@code {
+    public IBrowserFile file;
+    public string FileContents { get; set; } = string.Empty;
+    public DBOService DBOService { get; set; } = new DBOService();
+    [Parameter] public Type Type { get; set; }
+    public string Debug { get; set; }
+    public async Task HandleFileChange(InputFileChangeEventArgs e)
+    {
+        file = e.File;
+    }
+
+    public async Task UploadFile()
+    {
+        if (file != null)
+        {
+            using (var stream = file.OpenReadStream())
+            using (var reader = new StreamReader(stream))
+            {
+                FileContents = await reader.ReadToEndAsync();
+            }
+            Import();
+        }
+        
+    }
+    private void Import()
+    {
+        //Uniplemented Exception
+        Debug = "Unimplemented";
+        Exception e = new NotImplementedException();
+    }
+    
+}

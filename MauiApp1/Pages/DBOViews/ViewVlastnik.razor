@@ -1,0 +1,34 @@
+﻿@page "/vlastnik"
+@using alpha_3_CRUD
+@using MauiApp1.Pages.Components
+
+<h1>Vlastnik</h1>
+<h3>Search</h3>
+
+<input class="form-control" placehodler="" @bind="VD.selectedId" type="text">
+<button class="btn btn-primary" @onclick="VD.HandleSingleInputChange">Search!</button>
+<button class="btn btn-primary" @onclick="VD.HandleDelete">Delete ID!</button>
+<br>
+<label for="new-identifikator-nazev"> Identifikator: </label>
+<input class="form-control" placehodler="" id="new-identifikator-nazev"@bind="VD.newObject.Identifikator" type="text">
+
+<label for="new-jmeno-nazev"> Jmeno: </label>
+<input class="form-control" placehodler="" id="new-jmeno-nazev"@bind="VD.newObject.Jmeno" type="text">
+
+<label for="new-prijmeni-nazev"> Jmeno: </label>
+<input class="form-control" placehodler="" id="new-prijmeni-nazev"@bind="VD.newObject.Prijmeni" type="text">
+
+<label for="new-prijmeni-nazev"> Adresa: </label>
+<input class="form-control" placehodler="" id="new-adresa-nazev"@bind="VD.newObject.Adresa" type="text">
+<br>
+<button class="btn btn-primary" @onclick="VD.HandleCreate">Create!</button>
+<button class="btn btn-primary" @onclick="VD.HandleUpdate">Update ID!</button>
+<ReadSingleView @ref="VD.readSingleViewRef" ChildType="typeof(Vlastnik)" ItemId="@VD.selectedId"/>
+<h3>List</h3>
+<ListDataView @ref="VD.listDataViewRef" ChildType="typeof(Vlastnik)"/>
+<button class="btn btn-primary" @onclick="VD.HandleListInputChange">List!</button>
+<h3 @bind="VD.DebugText"></h3>
+<ImportJsonViewComponent Type="typeof(Vlastnik)"/>
+@code {
+    ViewData.ViewDataModel<Vlastnik> VD = new();
+}

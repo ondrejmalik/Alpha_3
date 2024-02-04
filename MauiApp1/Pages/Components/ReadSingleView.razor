@@ -1,0 +1,62 @@
+﻿@using System.Reflection
+@using alpha_3_CRUD
+@using MauiApp1.Data
+@inject DBOService DbObjectService
+
+@if (items == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            @foreach (var prop in properties)
+            {
+                <th>@prop.Key</th>
+            }
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var prop in properties)
+        {
+                <td>@prop.Value</td>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    [Parameter] public Type ChildType { get; set; }
+    [Parameter] public int ItemId { get; set; }
+    private DBObject[] items = new DBObject[1];
+    private Dictionary<string, string> properties = new Dictionary<string, string>();
+
+
+    public async Task OnBeforeRenderAsync()
+    {
+        items[0] = await DbObjectService.GetSingle(ItemId,ChildType);
+        SetPropValues();
+    }
+
+    private void SetPropValues()
+    {
+        properties.Clear();
+        PropertyInfo[] parentProperties = typeof(DBObject).GetProperties();
+
+        PropertyInfo[] childProperties = ChildType.GetProperties();
+
+        var uniqueProperties = childProperties.Where(childProp =>
+            !parentProperties.Any(parentProp => parentProp.Name == childProp.Name)
+        );
+
+        for (int i = 0; i < uniqueProperties.Count(); i++)
+        {
+            properties.Add(uniqueProperties.ElementAt(i).Name, uniqueProperties.ElementAt(i).GetValue(items[0]).ToString());
+        }
+    }
+
+}

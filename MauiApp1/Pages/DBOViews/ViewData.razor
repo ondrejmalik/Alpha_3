@@ -1,0 +1,76 @@
+﻿@using System.Reflection
+@using alpha_3_CRUD
+@using MauiApp1.Data
+@using MauiApp1.Pages.Components
+<h3>ViewData</h3>
+
+@code {
+
+    public class ViewDataModel<T> where T : DBObject
+    {
+        public string DebugText;
+        public int selectedId = 1;
+        public ReadSingleView readSingleViewRef;
+        public ListDataView listDataViewRef;
+        public IBrowserFile file;
+        public Config newConfig = new Config(AppSettings.path, AppSettings.keys);
+        public T newObject;
+        DBOService DbObjectService = new DBOService();
+        Type objectType = typeof(T);
+
+        public ViewDataModel()
+        {
+            ConstructorInfo constructor = objectType.GetConstructor(new Type[] { typeof(Config) });
+            if (constructor != null)
+            {
+                object[] parameters = new object[] { newConfig };
+                newObject = (T)constructor.Invoke(parameters);
+            }
+
+        }
+
+        public void HandleSingleInputChange()
+        {
+            readSingleViewRef.OnBeforeRenderAsync();
+        }
+
+        public void HandleListInputChange()
+        {
+            listDataViewRef.OnBeforeRenderAsync();
+        }
+
+        public async Task HandleCreate()
+        {
+            DbObjectService.Create(newObject, typeof(T));
+        }
+
+        public async Task HandleDelete()
+        {
+            DbObjectService.Delete(selectedId, typeof(T));
+        }
+
+        public async Task HandleUpdate()
+        {
+            DbObjectService.Update(newObject, selectedId, typeof(T));
+        }
+
+        public async Task HandleFileChange(InputFileChangeEventArgs e)
+        {
+            file = e.File;
+        }
+
+        public async Task UploadFile()
+        {
+            if (file != null)
+            {
+                string fileContents;
+                using (var stream = file.OpenReadStream())
+                using (var reader = new StreamReader(stream))
+                {
+                    fileContents = await reader.ReadToEndAsync();
+                }
+            }
+        }
+    }
+
+}

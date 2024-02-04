@@ -1,0 +1,31 @@
+﻿@using MauiApp1.Data
+@inherits LayoutComponentBase
+
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu/>
+    </div>
+    <h1 id="debug">@DebugMessage.Message</h1>
+    <main>
+        <div class="top-row px-4">
+            <a href="https://github.com/ondrejmalik/Alpha_3" target="_self">About</a>
+        </div>
+
+        <article class="content px-4">
+            @Body
+            
+        </article>
+    </main>
+</div>
+@{
+DebugMessage.Message = null;
+}
+<style>
+#debug {
+    position: absolute;
+    text-align: center;
+    top : 20%;
+    color : red;
+}
+</style>

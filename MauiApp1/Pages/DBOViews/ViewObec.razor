@@ -1,0 +1,29 @@
+﻿@page "/obec"
+@using alpha_3_CRUD
+@using MauiApp1.Pages.Components
+
+<h1>Obec</h1>
+<h3>Search</h3>
+
+<input class="form-control" placehodler="" @bind="VD.selectedId" type="text">
+<button class="btn btn-primary" @onclick="VD.HandleSingleInputChange">Search!</button>
+<button class="btn btn-primary" @onclick="VD.HandleDelete">Delete ID!</button>
+<br>
+<label for="new-nazev-nazev"> Nazev: </label>
+<input class="form-control" placehodler="" id="new-nazev-nazev"@bind="VD.newObject.Nazev" type="text">
+
+<label for="new-idokres-nazev"> IdOkres: </label>
+<input class="form-control" placehodler="" id="new-idokres-nazev"@bind="VD.newObject.IdOkes" type="text">
+<br>
+<button class="btn btn-primary" @onclick="VD.HandleCreate">Create!</button>
+<button class="btn btn-primary" @onclick="VD.HandleUpdate">Update ID!</button>
+<ReadSingleView @ref="VD.readSingleViewRef" ChildType="typeof(Obec)" ItemId="@VD.selectedId"/>
+<h3>List</h3>
+<ListDataView @ref="VD.listDataViewRef" ChildType="typeof(Obec)"/>
+<button class="btn btn-primary" @onclick="VD.HandleListInputChange">List!</button>
+<h3 @bind="VD.DebugText"></h3>
+<ImportJsonViewComponent Type="typeof(Obec)"/>
+
+@code {
+    ViewData.ViewDataModel<Obec> VD = new();
+}

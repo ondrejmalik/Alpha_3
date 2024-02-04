@@ -1,0 +1,22 @@
+﻿h1{
+    text-align: center;
+    margin: auto;
+    color: darkorange;
+}
+#parcela-container{
+    display:inline-block;
+    width: 48%;
+}
+#lv-container{
+    display:inline-block;
+    width: 48%;
+}
+#centered-container{
+    text-align: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+#change-button{
+    margin-top: 3px;
+    width: 100%;
+}

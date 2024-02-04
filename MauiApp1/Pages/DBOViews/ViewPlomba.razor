@@ -1,0 +1,35 @@
+﻿@page "/plomba"
+@using alpha_3_CRUD
+@using MauiApp1.Pages.Components
+
+<h1>plomba</h1>
+<h3>Search</h3>
+
+<input class="form-control" placehodler="" @bind="VD.selectedId" type="text">
+<button class="btn btn-primary" @onclick="VD.HandleSingleInputChange">Search!</button>
+<button class="btn btn-primary" @onclick="VD.HandleDelete">Delete ID!</button>
+<br>
+<label for="new-cislojednacihorizeni-nazev"> CisloJednacihoRizeni: </label>
+<input class="form-control" placehodler="" id="new-cislojednacihorizeni-nazev"@bind="VD.newObject.CisloJednacihoRizeni" type="text">
+
+<label for="new-datum-nazev"> Datum: </label>
+<input class="form-control" placehodler="" id="new-datum-nazev"@bind="VD.newObject.Datum" type="text">
+
+<label for="new-idpozemek-nazev"> NazevPozemek: </label>
+<input class="form-control" placehodler="" id="new-idpozemek-nazev"@bind="VD.newObject.NazevPozemek" type="text">
+
+<label for="new-popis-nazev"> Popis: </label>
+<input class="form-control" placehodler="" id="new-popis-nazev"@bind="VD.newObject.Popis" type="text">
+<br>
+<button class="btn btn-primary" @onclick="VD.HandleCreate">Create!</button>
+<button class="btn btn-primary" @onclick="VD.HandleUpdate">Update ID!</button>
+<ReadSingleView @ref="VD.readSingleViewRef" ChildType="typeof(Plomba)" ItemId="@VD.selectedId"/>
+<h3>List</h3>
+<ListDataView @ref="VD.listDataViewRef" ChildType="typeof(Plomba)"/>
+<button class="btn btn-primary" @onclick="VD.HandleListInputChange">List!</button>
+<h3 @bind="VD.DebugText"></h3>
+<ImportJsonViewComponent Type="typeof(Plomba)"/>
+
+@code {
+    ViewData.ViewDataModel<Plomba> VD = new();
+}

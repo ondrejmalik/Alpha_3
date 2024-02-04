@@ -1,0 +1,10 @@
+﻿<component name="libraryTable">
+  <library name="glide">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../../../Windows/Temp/JetBrains/xamarinAarPackages/glide/classes.jar" />
+      <root url="file://$PROJECT_DIR$/../../../../Windows/Temp/JetBrains/xamarinAarPackages/glide/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
