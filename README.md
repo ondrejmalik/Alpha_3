@@ -51,10 +51,10 @@ C:\\Users\\{currentuser}\\AppData\\Roaming\\alpha3
 - ERROR 5 Failed deserializing JSON - Nastala chyba při deserializaci JSON souboru zkontrolujte formát.
 ### Testovací scénáře
 - projekt obsahuje testovací scénáře.
-- ![export](TestCase01.pdf)
-- ![export](TestCase02.pdf)
-- ![export](TestCase03.pdf)
-- ![export](TestCase04.pdf)
+- ![TestCase01](src/TestCase01.pdf)
+- ![TestCase02](src/TestCase02.pdf)
+- ![TestCase03](src/TestCase03.pdf)
+- ![TestCase04](src/TestCase04.pdf)
 ### Závěrečné Resume
 #### Cíl 
 -Vytvořit databázovou aplikaci a databázi pro evidování pozemků v katastru nemovitostí. 
